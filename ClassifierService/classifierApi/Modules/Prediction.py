@@ -22,12 +22,17 @@ def get_profile_name(label):
         return "Very_Poor"
 
 
+new_model = tf.keras.models.load_model(
+    '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/road_classificiation_model')
+
+
 def predict_profile(file):
     print("Predicting .................................")
-    new_model = tf.keras.models.load_model(
-        '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/road_classificiation_model')
-    ar = convert_to_array(file)
+    img = cv2.imread(file)
+    # ar = self.convert_to_array(img)
+    ar = img
     ar = ar / 255
+    ar = cv2.resize(ar, (224, 224))
     a = []
     a.append(ar)
     a = np.array(a)
