@@ -2,7 +2,8 @@ from PIL import Image
 import numpy as np
 import cv2
 import tensorflow as tf
-
+import os
+from ClassifierService import settings
 
 def convert_to_array(img):
     im = cv2.imread(img)
@@ -22,13 +23,14 @@ def get_profile_name(label):
         return "Very_Poor"
 
 
-new_model = tf.keras.models.load_model(
-    '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/road_classificiation_model')
+print("Loading the model")
+new_model = tf.keras.models.load_model(os.path.join(settings.BASE_DIR,"classifierApi/road_classificiation_model"))
 
 
 def predict_profile(file):
     print("Predicting .................................")
     img = cv2.imread(file)
+    print(type(img))
     # ar = self.convert_to_array(img)
     ar = img
     ar = ar / 255
