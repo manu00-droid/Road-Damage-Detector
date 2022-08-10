@@ -5,28 +5,28 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import Prediction
 import zipfile
+from .models import picture,zipFile
+from ClassifierService import settings
 
 
 @api_view(['POST'])
 def imageHandler(request):
+
     print(request.FILES)
-    data = request.FILES['file']  # or self.files['image'] in your form
-    path = default_storage.save(
-        '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/static/' + str(data),
-        ContentFile(data.read()))
-    path = '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/static/' + str(data)
-    classify = Prediction.predict_profile(path)
+    data = request.FILES['file'] 
+    pic_model=picture.objects.create(pic=data)
+    classify = Prediction.predict_profile(settings.MEDIA_ROOT+"/userPics/"+str(data))
     print(classify)
     return Response(classify)
 
 
-@api_view['POST']
+@api_view(['POST'])
 def zipHandler(request):
-    data = request.FILES['file']  # or self.files['image'] in your form
-    path = default_storage.save(
-        '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/static/' + str(data),
-        ContentFile(data.read()))
-    path = '/home/manav/PycharmProjects/ClassifierAPI/ClassifierService/classifierApi/static/' + str(data)
-
-    with zipfile.ZipFile("file.zip", "r") as zip_ref:
-        zip_ref.extractall("targetdir")
+    data = request.FILES['file']  
+    zip_model=zipFile.objects.create(zip=data)
+    with zipfile.ZipFile(data, "r") as zip_ref:
+        zip_ref.extractall(settings.MEDIA_ROOT+"/userPics/")
+    resp="GOT FILE!"
+    print(resp)
+    
+    return Response(resp)
