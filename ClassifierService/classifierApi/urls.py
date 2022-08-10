@@ -5,6 +5,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('classify/', views.imageHandler),
-    # path('classify/zip/', views.zipHandler),
+    path('classify/zip/', views.zipHandler),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
