@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>We're sorry, but something went wrong (404)</title>
+  <style type="text/css">
+    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
+    div.dialog {
+      margin: 3em auto 0 auto;
+    }
+    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+  </style>
+</head>
+
+<body>
+  <!-- This file lives in public/404.html -->
+  <div style="padding-top: 50px">
+  <img src='/thingspeak_logo_white.png' width='200' height='35' style='background-color: #2f7eb2; padding: 10px;' /></div>
+  <div class="dialog">
+    <h1>Unable to access the page you are trying to reach</h1>
+    <p>You may have mistyped the address, the page may have moved, or you may be required to <a href="/login">log in</a> to access the page.</p>
+  </div>
+</body>
+</html>
